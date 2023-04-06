@@ -147,3 +147,15 @@ app.post("/albums", function (req, res) {
   albumsData.push(newAlbum);
   res.status(201).send({newAlbum});
 });
+
+// notice .delete
+app.delete("/albums/:albumId", function (req, res) {
+  const albumId = req.params.albumId;
+  const albumIndex = albumsData.findIndex((album) => album.albumId === albumId);
+  if (albumIndex !== -1) {
+    albumsData.splice(albumIndex, 1);
+    res.status(200).json({ success: true });
+  } else {
+    res.status(404).json({ error: "Album not found" });
+  }
+});
