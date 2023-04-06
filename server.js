@@ -116,3 +116,30 @@ app.get("/albums", function (req, res) {
 // 2. Test the endpoint with Postman. GET /albums should return
 // a JSON reply with the array we specified.
 // 3. Add another item to the array and test that the GET /albums returns three items. 
+
+
+// app.get("/albums/:albumId", function (req, res) {
+//   // req.params.albumId will match the value in the url after /albums/
+//   console.log(req.params.albumId);
+//   // now we can use the value for req.params.albumId to find the album requested
+//   // how do we "find" something in an array
+
+//   // finish the code yourself - it should end with res.send(album) where album is the single album you found  based on the id
+// });
+
+app.get("/albums/:albumId", function (req, res) {
+  // req.params.albumId will match the value in the url after /albums/
+  console.log(req.params.albumId);
+
+  // now we can use the value for req.params.albumId to find the album requested
+  const albumId = req.params.albumId;
+  const album = albumsData.find((a) => a.albumId === albumId);
+
+  // check if the album exists in the array
+  if (!album) {
+    res.status(404).send("Album not found");
+  } else {
+    // send the album as a response
+    res.send(album);
+  }
+});
