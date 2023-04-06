@@ -64,10 +64,12 @@ app.get("/multiply", function (req, res) {
   let v2 = req.query.value2;
   let v3 = req.query.value3;
   let v4 = req.query;
+  let v5 = req;
   res.send(`You searched for value1: ${v1} and value2: ${v2}`);
+  console.log(v5);
+  console.log(v4);
   console.log(v1);
   console.log(v2);
   console.log(v3);
-  console.log(v4);
 });
 
