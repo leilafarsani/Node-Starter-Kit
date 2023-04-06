@@ -87,18 +87,9 @@ const albumsData = [
     primaryGenreName: "Pop",
     url: "https://www.youtube.com/embed/PeonBmeFR8o?rel=0&amp;controls=0&amp;showinfo=0",
   },
+  
   {
     albumId: "11",
-    artistName: "Beyoncé",
-    collectionName: "Dangerously In Love",
-    artworkUrl100:
-      "http://is1.mzstatic.com/image/thumb/Music/v4/18/93/6d/18936d85-8f6b-7597-87ef-62c4c5211298/source/100x100bb.jpg",
-    releaseDate: "2003-06-24T07:00:00Z",
-    primaryGenreName: "Pop",
-    url: "https://www.youtube.com/embed/ViwtNLUqkMY?rel=0&amp;controls=0&amp;showinfo=0",
-  },
-  {
-    albumId: "12",
     artistName: "Beyoncé",
     collectionName: "Dangerously In Love",
     artworkUrl100:
@@ -142,4 +133,17 @@ app.get("/albums/:albumId", function (req, res) {
     // send the album as a response
     res.send(album);
   }
+});
+
+//POST
+// notice .post (not .get)
+app.use(express.json()); // before our routes definition **** We need it to access request body.
+//Now we will receive the data as req.body. 
+
+app.post("/albums", function (req, res) {
+  console.log("POST /albums route");
+  console.log(req.body);
+  const newAlbum = req.body;
+  albumsData.push(newAlbum);
+  res.status(201).send({newAlbum});
 });
